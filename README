@@ -1,0 +1,77 @@
+                        ASM Observer                        
+            Open Source Reverse Engineering Software        
+
+== Resources ==
+how to code debuggers: http://t-a-w.blogspot.ch/2007/03/how-to-code-debuggers.html
+
+
+==Architecture ==
+tiny core, many modules which can be called from a CLI, from within python, or from other modules.
+
+  === Code Structure ===
+src/
+  asm-observer.py
+  
+  libs/
+    import/
+      nasm.py
+      objdump.py
+      
+  modules/
+    core/
+      disassembler.py
+      assembler.py
+      editor/
+        flowchart.py
+        completition.py
+        helpers.py (substitute memory locations vor variable names, etc)
+        
+    gui/
+        
+    monitor/
+      network.py
+      fs.py
+      memory.py
+      library.py
+      vm/
+        vm.py
+        
+    webui/
+    workspace/
+
+  === Program Flow ===
+*Program starts in asm-observer.py
+*Program setup, load default modules, etc
+*Start GUIs and background threads
+*GUIs wait for command and forward the instruction to the Main class in asm-observer
+*Main class runs command and updates program state
+*Main class notifies GUIs that it is done
+*GUIs update.
+*GOTO: #2
+
+
+
+== GUI ==
+*Web UI
+*Normal GUI
+*Collaborative Analysis (both web and desktop UI)
+
+== Features ==
+*assembler
+*disassembler
+*flowchart with inlined ASM
+*some kind of monitor? (net-monitor, file access monitor, etc)
+*sandbox\VM!!
+*Protocol analyser
+
+*hex viewer
+*unpacker
+*debugger?
+*import/export data/notes
+*in a semi-human readable format (better for git)
+
+== Minimum Requirements for First Release ==
+*disassembler
+*assembler
+*editor (syntax highlighting)
+*maybe flowchart
