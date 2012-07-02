@@ -1,5 +1,6 @@
 #! /usr/bin/env python3
 import sys
+import libs.logging
 
 class Main():
     '''Contains the setup code and the input loop. This class stores all
@@ -26,6 +27,11 @@ class Main():
             self.params['verbose'] = 1
         if '-v5' in sys.argv:
             self.params['verbose'] = 5
+
+        
+        # basic setup
+        self.logger = libs.logging.get_logger()
+        self.logger.critical("trololol")
 
         # Preform additional setup
         self.load_modules(self.autoload_modules)
