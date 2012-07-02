@@ -62,6 +62,10 @@ class Main():
         '''
         self.commands[name] = pointer
 
+    def call_module(self, name, params):
+        if name in self.commands:
+                self.commands[name](self, params)
+
     def input_loop(self):
         '''Get input from the user and run commands with it.'''
         while self.running:
@@ -71,8 +75,7 @@ class Main():
             if len(inp) > 1:
                 params = inp[1]
 
-            if inp[0] in self.commands:
-                self.commands[inp[0]](self, params)
+            self.call_module(inp[0],params)
 
 if __name__ == '__main__':
     print('''
