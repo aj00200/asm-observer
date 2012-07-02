@@ -7,6 +7,6 @@ class Module(modules.core.Module):
         '''SYNTAX: quit
           Shutdown ASM Observer
         '''
-        uv.running = False
+        main.running = False
         print(' [*] Shutting down...')
         print('     Goodbye :)')
