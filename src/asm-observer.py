@@ -1,5 +1,6 @@
 #! /usr/bin/env python3
 import sys
+import libs.logging
 
 class Main():
     '''Contains the setup code and the input loop. This class stores all
@@ -26,6 +27,11 @@ class Main():
             self.params['verbose'] = 1
         if '-v5' in sys.argv:
             self.params['verbose'] = 5
+
+        
+        # basic setup
+        self.logger = libs.logging.get_logger()
+        self.logger.critical("trololol")
 
         # Preform additional setup
         self.load_modules(self.autoload_modules)
@@ -62,6 +68,10 @@ class Main():
         '''
         self.commands[name] = pointer
 
+    def call_module(self, name, params):
+        if name in self.commands:
+                self.commands[name](self, params)
+
     def input_loop(self):
         '''Get input from the user and run commands with it.'''
         while self.running:
@@ -71,8 +81,7 @@ class Main():
             if len(inp) > 1:
                 params = inp[1]
 
-            if inp[0] in self.commands:
-                self.commands[inp[0]](self, params)
+            self.call_module(inp[0],params)
 
 if __name__ == '__main__':
     print('''
