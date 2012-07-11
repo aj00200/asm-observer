@@ -13,7 +13,7 @@ class Main():
     modules = {}
     commands = {}
     environment = {}
-    autoload_modules = ['core', 'workspace']
+    autoload_modules = ['core', 'workspace', 'import_asm']
 
     workspace = ''
     workspaces = {}
@@ -76,7 +76,7 @@ class Main():
 
 if __name__ == '__main__':
     print('''
-                           <<<   \x1B[;32ASM Observer\x1B[m   >>>
+                           <<<   \x1B[;32mASM Observer\x1B[m   >>>
     ''')
 
     main = Main()
