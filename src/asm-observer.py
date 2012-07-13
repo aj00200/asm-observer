@@ -1,5 +1,6 @@
 #! /usr/bin/env python3
 import sys
+import readline
 import libs.logging
 
 class Main():
@@ -32,6 +33,12 @@ class Main():
         # basic setup
         self.logger = libs.logging.get_logger()
         self.logger.critical("trololol")
+
+        self.last_complete = None
+        self.last_complete_list = []
+        readline.set_completer(self.complete)
+        readline.parse_and_bind("tab: complete")
+
 
         # Preform additional setup
         self.load_modules(self.autoload_modules)
@@ -82,6 +89,17 @@ class Main():
                 params = inp[1]
 
             self.call_module(inp[0],params)
+
+    def complete(self, text, state):
+        if text == self.last_complete:
+            return self.last_complete_list[state]
+        else:
+            self.last_complete = text
+            self.last_complete_list = []
+            for command in self.commands:
+                if command.startswith(text):
+                    self.last_complete_list.append(command)
+            return self.last_complete_list[0]
 
 if __name__ == '__main__':
     print('''

@@ -13,7 +13,7 @@ class Module(modules.import_asm.Module):
             print('Need a filename')
             return
 
-        asm = libs.asm.ASM()
+        asm = libs.asm.ASM(params)
 
         # Open the objdump file
         f = open(params)

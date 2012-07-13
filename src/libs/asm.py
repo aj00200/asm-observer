@@ -2,7 +2,8 @@
 class ASM():
     '''Store ASM code in an easy-to-access object.'''
 
-    def __init__(self):
+    def __init__(self, name):
+        self.name = name
         self.labels = {}
         self.code = {}
 
